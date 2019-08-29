@@ -1,6 +1,7 @@
 @products.each do |product|
-  {
-    name:,
+  { 
+    id: ,
+    name: ,
     price:,
     image_url:,
     description:
