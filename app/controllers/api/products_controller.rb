@@ -6,7 +6,7 @@ class Api::ProductsController < ApplicationController
   end
 
   def create
-    @prouct = Product.new(
+    @product = Product.new(
                           id: params[:id],
                           name: params[:name],
                           price: params[:price],
@@ -21,6 +21,25 @@ class Api::ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     render 'show.json.jb'
+  end
+
+  def update
+    @product = Product.find(params[:id])
+
+    @product.name = params[:name] || @product.name
+    @product.price = params[:price] || @product.price
+    @product.image_url = params[:image_url] || @product.image_url
+    @product.description = params[:description] || @product.description
+
+    @product.save
+    render 'show.json.jb'
+
+  end
+
+  def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+    render json: {message: "Successfully Destroyed Recipe."}   
   end
 
 end
